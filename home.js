@@ -5,13 +5,13 @@ var home = function(){
 
   var api = "";
 
-    $(function(){
+  $(function(){
 
         $.get("../googleBooksAPIKey.txt", function(data){
           //get api key
           api = data.trim();
         });
-
+        
         //set hash to #home
         location.hash="home";
         //ajax call to retrieve info from lib.json
@@ -30,30 +30,26 @@ var home = function(){
             //add author and title li to ul
             book.append("<li class='title'>" + t + "</li>");
             book.append("<li clas='author'>" + a + "</li>");
+
             //get book title for api call to Google Books
-            var title = t;
+            var googleAPI = "https://www.googleapis.com/books/v1/volumes?q="+t+"+inauthor:"+a+"&key="+api;
 
-            var googleAPI = "https://www.googleapis.com/books/v1/volumes?q="+title+"+inauthor:"+a+"&key="+api;
             //ajax call to google books api
-
             $.getJSON(googleAPI, function(response){
 
-                  // set the items from the response object
-                  var item = "";
-                  var item = response.items[0];
-                  var description = item.volumeInfo.description;
-                  var shortDescription = description.slice(0,250);
-                  var image = item.volumeInfo.imageLinks.thumbnail;
-                  // console.log(description + image);
-                  book.prepend("<li class='image'><img src='" + image + "'>" + "</li>");
-                  book.append("<li class='description'>" + shortDescription + "<span>...MORE</span></li>");
+              // set the items from the response object
+              var item = "";
+              var item = response.items[0];
+              var description = item.volumeInfo.description;
+              var shortDescription = description.slice(0,250);
+              var image = item.volumeInfo.imageLinks.thumbnail;
 
+              book.prepend("<li class='image'><img src='" + image + "'>" + "</li>");
+              book.append("<li class='description'>" + shortDescription + "<span>...MORE</span></li>");
             });//end $.getJSON for description and image
-
             //append #books div in body of html
             $("#books").append(book);
-
-          });//end $.each(bks...)
-        });//end getJSON to lib.json...
-  });//end document.ready
+        });//end $.each(bks...)
+      });//end getJSON to lib.json...
+    });//end document.ready
 };//end home
