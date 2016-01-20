@@ -1,0 +1,29 @@
+{
+    "books" : [
+      {
+        "title": "The Quartet",
+        "author": "Joseph J. Ellis"
+      },
+      {
+        "title": "Founding Brothers",
+        "author": "Joseph J. Ellis"
+      },
+      {
+        "title": "The Great Upheaval",
+        "author": "Jay Winik"
+      },
+      {
+        "title": "Ratification",
+        "author": "Pauline Maier"
+      },
+      {
+        "title": "Lafayette in the Somewhat United States",
+        "author": "Sarah Vowell"
+      },
+      {
+        "title": "The Bully Pulpit",
+        "author": "Doris Kearns Goodwin"
+      }
+
+    ]
+}
