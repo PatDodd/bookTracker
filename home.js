@@ -15,7 +15,7 @@ var home = function(){
         //set hash to #home
         location.hash="home";
         //ajax call to retrieve info from lib.json
-        $.getJSON("lib.json", function(data, bks){
+        $.getJSON("json/lib.json", function(data, bks){
 
           //store books data from lib.json
           var bks = data.books;
@@ -32,8 +32,7 @@ var home = function(){
             book.append("<li clas='author'>" + a + "</li>");
             //get book title for api call to Google Books
             var title = t;
-            var foo = api;
-            console.log(foo);
+
             var googleAPI = "https://www.googleapis.com/books/v1/volumes?q="+title+"+inauthor:"+a+"&key="+api;
             //ajax call to google books api
 
