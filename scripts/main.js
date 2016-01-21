@@ -3,7 +3,8 @@
 //id being must be available after script loads
 var id = 0;
 var api = "";
-var description = "";
+var d = "";
+var sd = ""
 var title = "";
 var hashTags = [];
 
@@ -44,28 +45,16 @@ var loadBooks = function(bkEv){
       //get author and title
        a = this.author;
        t = this.title;
+       th = this.thumbnail;
+       d = this.description;
+       sd = d.slice(0,250);
 
       //add author and title li to ul
+      book.prepend("<li class='image'><img src='" + th + "'>" + "</li>");
       book.append("<li class='title'>" + t + "</li>");
       book.append("<li clas='author'>" + a + "</li>");
+      book.append("<li class='description'>" + sd + "<span>...MORE</span></li>");
 
-      //get book title for api call to Google Books
-      var googleAPI = "https://www.googleapis.com/books/v1/volumes?q="+t+"+inauthor:"+a+"&key="+api+"&country=USA";
-/*
-      //ajax call to google books api
-      $.getJSON(googleAPI, function(response){
-
-        // set the items from the response object
-        var item = "";
-        var item = response.items[0];
-        description = item.volumeInfo.description;
-        var shortDescription = description.slice(0,250);
-        var image = item.volumeInfo.imageLinks.thumbnail;
-
-        book.prepend("<li class='image'><img src='" + image + "'>" + "</li>");
-        book.append("<li class='description'>" + shortDescription + "<span>...MORE</span></li>");
-      });//end $.getJSON for description and image
-*/
       //append #books div in body of html
       $("#books").append(book);
 
@@ -97,15 +86,18 @@ var bookEvents = function(){
           $(this).remove();
         }
         location.hash = h + "/" + id;
-
-        $(this).append("<li class='description'>" + description + "</li>")
-               .css({
-                    "height":"100%",
-                    "width":"700px",
-                    "border":"1px solid black",
-                    "background-color":"transparent"
-                   });
-
+        var newDescr = "";
+        $.getJSON("json/lib.json", function(data){
+          newDescr = data.books[id].description;
+        });
+        $(".description").replace("<li class='description'>" + newDescr + "</li>");
+        $(".book").css({
+                        "height":"100%",
+                        "width":"700px",
+                        "border":"1px solid black",
+                        "background-color":"transparent"
+                       });
+  console.log(newDescr);
 
       });//end $(bObj).children('.book'...
       $(".book").unbind("click");
@@ -135,10 +127,17 @@ var watchHashChanges = function(){
       $.getJSON("json/lib.json", function(data){
 
         var books = $("#books");
-        var book = $("<ul class='book' id = " + value + ">").css({"height":"100%","width":"700px"});
+        var book = $("<ul class='book' id = " + value + ">").css({
+                                                                 "height":"100%",
+                                                                 "width":"700px",
+                                                                 "border":"1px solid black",
+                                                                 "background-color":"transparent"
+                                                                });;
         books.append(book);
         book.append("<li class='title'>" + data.books[value].title + "</li>");
         book.append("<li clas='author'>" + data.books[value].author + "</li>");
+        book.append("<li class='description'>" + data.books[value].description + "</li>")
+        book.prepend("<li class='image'><img src='" + data.books[value].thumbnail + "'>" + "</li>");
       });
     }
   });
