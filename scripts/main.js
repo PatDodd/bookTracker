@@ -102,8 +102,8 @@ var bookEvents = function(){
                .css({
                     "height":"100%",
                     "width":"700px",
-                     "border":"1px solid black",
-                     "background-color":"transparent"
+                    "border":"1px solid black",
+                    "background-color":"transparent"
                    });
 
 
