@@ -13,11 +13,13 @@ menu, nav, section, summary {
 .book{
   list-style: none;
   display:inline-block;
+  font-family: times;
   width:320px;
   margin: 30px;
   height:400px;
   border: 1px solid black;
   padding: 10px;
+  cursor: pointer;
 }
 
 .book li{

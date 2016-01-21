@@ -2,27 +2,39 @@
     "books" : [
       {
         "title": "The Quartet",
-        "author": "Joseph J. Ellis"
+        "author": "Joseph J. Ellis",
+        "hash" : "TheQuartet",
+        "id" : 0
       },
       {
         "title": "Founding Brothers",
-        "author": "Joseph J. Ellis"
+        "author": "Joseph J. Ellis",
+        "hash" : "FoundingBrothers",
+        "id" : 1
       },
       {
         "title": "The Great Upheaval",
-        "author": "Jay Winik"
+        "author": "Jay Winik",
+        "hash" : "TheGreatUpheaval",
+        "id" : 2
       },
       {
         "title": "Ratification",
-        "author": "Pauline Maier"
+        "author": "Pauline Maier",
+        "hash" : "Ratification",
+        "id" : 3
       },
       {
         "title": "Lafayette in the Somewhat United States",
-        "author": "Sarah Vowell"
+        "author": "Sarah Vowell",
+        "hash" : "LafayetteintheSomewhatUnitedStates",
+        "id" : 4
       },
       {
         "title": "The Bully Pulpit",
-        "author": "Doris Kearns Goodwin"
+        "author": "Doris Kearns Goodwin",
+        "hash" : "TheBullyPulpit",
+        "id" : 5
       }
 
     ]
