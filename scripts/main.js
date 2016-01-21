@@ -99,7 +99,12 @@ var bookEvents = function(){
         location.hash = h + "/" + id;
 
         $(this).append("<li class='description'>" + description + "</li>")
-               .css({"height":"100%","width":"700px"});
+               .css({
+                    "height":"100%",
+                    "width":"700px",
+                     "border":"1px solid black",
+                     "background-color":"transparent"
+                   });
 
 
       });//end $(bObj).children('.book'...
@@ -130,10 +135,7 @@ var watchHashChanges = function(){
       $.getJSON("json/lib.json", function(data){
 
         var books = $("#books");
-        var book = $("<ul class='book' id = " + value + ">").css({"height":"100%",
-                                                                  "width":"700px",
-                                                                  "border":"1px solid black",
-                                                                  "background-color":"transparent"});
+        var book = $("<ul class='book' id = " + value + ">").css({"height":"100%","width":"700px"});
         books.append(book);
         book.append("<li class='title'>" + data.books[value].title + "</li>");
         book.append("<li clas='author'>" + data.books[value].author + "</li>");
