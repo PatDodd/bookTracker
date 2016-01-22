@@ -114,3 +114,30 @@ var home = function(){
     }//end if(location.hash == "home" || " ")...
   });//end document.ready...
 };//end home
+
+// var addToCart = function(){
+//   $(".price").after("<li><button class='cart'>Add to cart</button></li>");
+//   $('.book li .cart').bind("click",function(){
+//     var ttl = $('.book .title').html();
+//     var auth = $('.book .author').html();
+//     var pri = $('.book .pNum').html();
+//     item = {ttl, auth, pri};
+//
+//     if(document.cookie == ""){
+//       var arr = [];
+//       arr.push(item);
+//       document.cookie =  JSON.stringify(arr);
+//       $("#cartCount").html(arr.length + " items in cart");
+//     } else {
+//       //if cookie exists, grab it as a array or objects
+//       var ck = document.cookie;
+//
+//       console.log(ck)
+//       //push item in cart variable into cookie array
+//       //ck.push(item);
+//       //copy the new array back to cookie
+//     //  document.cookie = "items=" + escape(ck);
+//     //  $("#cartCount").html(ck.length + " items in cart");
+//     }// end if cookie...
+//   });//end .bind
+// };//end addToCart func
