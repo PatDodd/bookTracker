@@ -1,4 +1,4 @@
-//script.js
+//main.js
 
 //id being must be available after script loads
 var id = 0;
@@ -10,7 +10,7 @@ var hashTags = [];
 var item = {};
 var arr = [];
 
-  //document.ready...
+//document.ready...
 $(function(){
     //set hash to #home
     location.hash="home";
@@ -22,7 +22,9 @@ $(function(){
 
 });//end document.ready...
 
-//FUNCTIONS
+
+/**************Functions***************/
+
 //load books on #home
 var loadBooks = function(bkEv){
 
@@ -88,8 +90,6 @@ var bookEvents = function(){
     id = $(this).attr('id');
     var h = hashTags[id];
     var bObj = $("#books");
-
-//$(this).after("<button class='cart'>Add to cart</button>");
 
     $(bObj).children('.book').each(function(i){
 
@@ -191,8 +191,11 @@ var addToSessionCart = function(){
 
 //get cart count on home page, put up in document.ready
 var getCartCount = function(){
-  var cart = JSON.parse(sessionStorage.getItem("cart"));
-  $("#cartCount").html(cart.length + " items in cart");
+  if(sessionStorage.getItem('cart')){
+    var cart = JSON.parse(sessionStorage.getItem("cart"));
+    $("#cartCount").html(cart.length + " items in cart");
+  }
+
 }
 
 // console.log(window.sessionStorage["carts"]);
