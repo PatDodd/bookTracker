@@ -9,7 +9,14 @@ menu, nav, section, summary {
   font: inherit;
   vertical-align: baseline; }
 
-.book {
+div#cartContain {
+  margin: 10px 0px 10px 30px; }
+
+div#cartContain a {
+  text-decoration: none;
+  color: #373740; }
+
+ul.book {
   list-style: none;
   display: inline-block;
   font-family: times;
@@ -20,16 +27,26 @@ menu, nav, section, summary {
   padding: 10px;
   cursor: pointer; }
 
-.book li {
+ul.book li {
   line-height: 18px; }
 
 .description {
   margin-top: 10px; }
 
-.book .image {
+ul.book .image {
   margin-bottom: 10px; }
 
 img {
   height: 210px; }
+
+table.book {
+  width: 500px;
+  margin: 30px;
+  height: 100%;
+  border: 1px solid black;
+  padding: 10px; }
+
+table.book td {
+  width: 250px; }
 
 /*# sourceMappingURL=style.css.map */

@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2" />
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <script src="scripts/jquery-1.11.1.js"></script>
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   </head>
   <body>
-    <div id="cartCount">
-
+    <div id="cartContain">
+      <a href="javascript:void(0)" id="goToCart"><i class="fa fa-cart-arrow-down fa-2x"></i><p id="cartCount"></p></a>
     </div>
     <div id="books">
 
@@ -19,5 +19,6 @@
       <script>
         location.hash = "home";
         watchHashChanges();
+        loadCartViewOnClick();
       </script>
 </html>

@@ -131,7 +131,7 @@ var watchHashChanges = function(){
       $("#books").empty();
       loadBooks(bookEvents);
       //location.reload();
-    } else if(location.hash != "#home" && location.hash != "#cart" && $('#books .book').length !=1 ){
+    } else if(location.hash != "#home" && location.hash != "#cart" /*&& $('#books .book').length !=1*/ ){
       //if hash isn't #home and there too many uls, empty books div and repopulte with proper book in hashed url
       $("#books").empty();
 
@@ -160,6 +160,8 @@ var watchHashChanges = function(){
 
         addToSessionCart();
       });//end getJSON for watchHashChanges
+    } else if (location.hash == "#cart") {
+      loadCartView();
     }//end if watchHashChanges
 
   });//end window.on hashchanges
@@ -171,20 +173,21 @@ var addToSessionCart = function(){
 
   $('.book li .cart').bind("click",function(){
     var ttl = $('.book .title').html();
-    var auth = $('.book .author').html();
     var pri = $('.book .pNum').html();
     var obj = {};
-    obj = {"title":ttl, "author":auth, "price":pri};
-
+    obj = {"title":ttl, "price":pri, "quantity":1};
+    var cartParsed = [];
     if(!sessionStorage.getItem('cart')){
       arr.push(obj);
       sessionStorage.setItem("cart", JSON.stringify(arr));
       $("#cartCount").html(arr.length + " items in cart");
     } else {
-      var cartParsed = JSON.parse(sessionStorage.getItem('cart'));
+      cartParsed = JSON.parse(sessionStorage.getItem('cart'));
+      //check for matches before adding
       cartParsed.push(obj);
       sessionStorage.setItem("cart", JSON.stringify(cartParsed));
       $("#cartCount").html(cartParsed.length + " items in cart");
+
     }//end if
   });//end .bind func
 };//end addToSessionCart
@@ -194,15 +197,61 @@ var getCartCount = function(){
   if(sessionStorage.getItem('cart')){
     var cart = JSON.parse(sessionStorage.getItem("cart"));
     $("#cartCount").html(cart.length + " items in cart");
-  }
+  }//endif
+};//end getCartCount
 
-}
+var loadCartViewOnClick = function(){
+  $("#goToCart").bind("click", function(){
+    loadCartView();
 
-// console.log(window.sessionStorage["carts"]);
-// sessionStorage.setItem("stuff",JSON.stringify([{"boom":"bam"},{"num": 12},{"foo":"bar"}]));
-// var x = JSON.parse(sessionStorage.getItem("stuff"));
-// x.push({"bing":"bong"});
-// sessionStorage.setItem("stuff", JSON.stringify(x));
-// for(i=0; i<x.length; i++){
-//   console.log(x[i]);
-// }
+  });//end #goToCart bind func
+};//end loadCartView func
+
+var loadCartView = function(){
+  var cart = [];
+  var total = 0;
+  location.hash = "cart";
+  $("#books").empty();
+  cart = getCartObject(cart);
+
+  //sort books alphabetically by title
+  cart.sort(function(a,b){
+      if(a.title < b.title){ return -1;}
+      if(a.title > b.title){ return 1;}
+      return 0;
+  });
+
+  var booksInCart = $("#books");
+  var items = $("<table class='book'>");
+  booksInCart.append(items);
+  for(i=0; i<cart.length; i++){
+    $(items).append("<tr><td class='cartItem'>"+cart[i].title +"</td><td class='priceItem'>$"+cart[i].price+" x  "+cart[i].quantity+"</td></tr>");
+    total+=parseFloat(cart[i].price);
+  }//end for
+  $(items).append("<tr class='totesCost'><td class='totalCost'>Your Total:</td><td>$"+total.toFixed(2)+"</td></tr>");
+  $(".totesCost").css({"font-weight":"bold"});
+  $(items).append("<tr><td></td><td><button id='emptyCart'>Empty Cart</button></td><tr>");
+  emptyCart();
+};//loadCartView
+
+var getCartObject = function(item){
+  var item = [];
+  if(!sessionStorage.getItem('cart')){
+    $('#books').append("<p>CART IS EMPTY</p>")
+  } else {
+  item = JSON.parse(sessionStorage.getItem("cart"));
+    for(i=0; i<item.length; i++){
+      console.log(item[i]);
+    }//end for
+  }//end if
+return item;
+};//end getCartObject
+
+var emptyCart = function(){
+  $("#emptyCart").bind("click", function(){
+    sessionStorage.removeItem("cart");
+    $("table.book").empty();
+    $("table.book").append("Deletion successful. Your cart is now empty.");
+    $("#cartCount").html("");
+  });
+};
