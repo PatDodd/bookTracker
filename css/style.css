@@ -3,6 +3,8 @@
 @font-face {
   font-family: CenturyGothicStd;
   src: url(fonts/CenturyGothicStd.ttf); }
+/***sass variables***/
+/***css reset***/
 html, body, div, span, h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, img, strong, ol, ul, li, article, aside, footer, header, hgroup,
 menu, nav, section, summary {
@@ -14,7 +16,10 @@ menu, nav, section, summary {
   vertical-align: baseline; }
 
 body {
-  font-family: CenturyGothicStd; }
+  font-family: CenturyGothicStd, Helvetica, sans-serif; }
+
+#logo-container {
+  cursor: pointer; }
 
 div#cartContain {
   margin: 10px 0px 10px 30px; }
@@ -34,7 +39,7 @@ div#cartContain p#tagline {
 ul.book {
   list-style: none;
   display: inline-block;
-  font-family: CenturyGothicStd;
+  font-family: CenturyGothicStd, Helvetica, sans-serif;
   width: 335px;
   margin: 30px;
   height: 100%;
@@ -58,13 +63,13 @@ img {
   height: 210px; }
 
 table.book {
-  width: 500px;
+  width: 1000px;
   margin: 30px;
   height: 100%;
   border: 1px solid black;
   padding: 10px; }
 
 table.book td {
-  width: 250px; }
+  width: 0.33333%; }
 
 /*# sourceMappingURL=style.css.map */

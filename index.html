@@ -9,8 +9,10 @@
   </head>
   <body>
     <div id="cartContain">
+      <div id="logo-container">
       <p id="logo">History House Books</p>
       <p id="tagline">Take a page from the past</p>
+    </div>
       <a href="javascript:void(0)" id="homeIcon"><i class="fa fa-home fa-2x"></i></a>
       <a href="javascript:void(0)" id="goToCart"><i class="fa fa-shopping-cart fa-2x"></i><a id="cartCount"></a></a>
     </div>
@@ -20,7 +22,7 @@
   </body>
       <script src="scripts/main.js"></script>
       <script>
-        //location.hash = "home";
+        location.hash = "home";
         watchHashChanges();
         loadCartViewOnClick();
       </script>

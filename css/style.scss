@@ -5,6 +5,13 @@
 	src: url(fonts/CenturyGothicStd.ttf);
 }
 
+/***sass variables***/
+$fonts: CenturyGothicStd, Helvetica, sans-serif;
+$darkGray:#373740;
+$lineHeight:1.5em;
+$space-after:0.5em;
+
+/***css reset***/
 html, body, div, span, h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, img, strong, ol, ul, li, article, aside, footer, header, hgroup,
 menu, nav, section, summary {
@@ -17,7 +24,11 @@ menu, nav, section, summary {
 }
 
 body{
-	font-family: CenturyGothicStd;
+	font-family: $fonts;
+}
+
+#logo-container{
+	cursor: pointer;
 }
 
 div#cartContain{
@@ -26,7 +37,7 @@ div#cartContain{
 
 div#cartContain a{
 	text-decoration: none;
-	color: #373740;
+	color: $darkGray;
 	margin-right: 20px;
 }
 
@@ -42,8 +53,8 @@ div#cartContain p#tagline{
 ul.book{
   list-style: none;
   display:inline-block;
-  // font-family: times;
-	font-family: CenturyGothicStd;
+
+	font-family: $fonts;
   width:335px;
   margin: 30px;
   height:100%;
@@ -53,7 +64,7 @@ ul.book{
 }
 
 ul.book li{
-  line-height: 1.5em;
+  line-height: $lineHeight;
 }
 
 .description{
@@ -61,7 +72,7 @@ ul.book li{
 }
 
 .description p {
-	margin-bottom: 0.5em;
+	margin-bottom: $space-after;
 }
 
 ul.book .image {
@@ -73,7 +84,7 @@ img{
 }
 
 table.book{
-	width:500px;
+	width:1000px;
 	margin: 30px;
 	height:100%;
 	border: 1px solid black;
@@ -81,5 +92,5 @@ table.book{
 }
 
 table.book td{
-	width: 250px;
+	width: 0.33333%;
 }

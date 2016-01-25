@@ -19,6 +19,7 @@ $(function(){
     loadBooks(bookEvents);
     getCartCount();
     homeIconClick();
+    logoClick();
   }//end if(location.hash == "home" || " ")...
 });//end document.ready...
 
@@ -27,11 +28,6 @@ $(function(){
 
 //load books on #home
 var loadBooks = function(bkEv){
-
-  // $.get("../googleBooksAPIKey.txt", function(data){
-  //   //get api key
-  //   api = data.trim();
-  // });
 
   //ajax call to retrieve info from lib.json
   $.getJSON("json/lib.json", function(data, bks){
@@ -76,7 +72,7 @@ var loadBooks = function(bkEv){
 var bookEvents = function(){
 
   $(".book").on("mouseenter", function(){
-    $(this).css({"border":"3px solid black","background-color":"grey"});
+    $(this).css({"border":"1.5px solid black","background-color":"#ECF0F1"});
   });
 
   $(".book").on("mouseleave", function(){
@@ -84,7 +80,7 @@ var bookEvents = function(){
   });
 
   $(".book").click(function(){
-    console.log($(this));
+  //  console.log($(this));
     $('.button').append("<button class='cart'>Add to Cart</button>");
     addToSessionCart();
     id = $(this).attr('id');
@@ -207,6 +203,7 @@ var loadCartViewOnClick = function(){
   });//end #goToCart bind func
 };//end loadCartView func
 
+//load the shopping cart view
 var loadCartView = function(){
   var cart = [];
   var total = 0;
@@ -246,6 +243,7 @@ var getCartObject = function(item){
 return item;
 };//end getCartObject
 
+//remove a single item from the shopping cart, updating DOM and sessionStorage
 var removeItem = function(){
   $(".book .remove").bind("click", function(){
     var seshArr = [];
@@ -261,8 +259,6 @@ var removeItem = function(){
       pri = $(this).children(".priceItem").children(".innerPrice").html();
       p = parseFloat(pri);
 
-      // var itemCount = $(this).children().length;
-      // console.log($(this).children().length);
       seshObj = {"title":ttl, "price":p, "quantity":1};
 
       if(seshObj.title != undefined && seshObj.price != undefined){
@@ -284,6 +280,7 @@ var removeItem = function(){
   });//end .bind
 };//end removeItem
 
+//empty entire cart from sessionStorage
 var emptyCart = function(){
   $("#emptyCart").bind("click", function(){
     sessionStorage.removeItem("cart");
@@ -291,12 +288,22 @@ var emptyCart = function(){
     $("table.book").append("Deletion successful. Your cart is now empty.");
     $("#cartCount").html("");
   });
-};
+};//end empty cart
 
+//set home icon to load home onClick
 var homeIconClick = function(){
   $("#homeIcon").bind("click", function(){
     $("#books").empty();
     loadBooks(bookEvents);
     location.hash = "home";
   });
-};
+};//end homeIconClick
+
+//logoClick() set logo to load home onClick
+var logoClick = function(){
+  $("#logo-container").bind("click", function(){
+    $("#books").empty();
+    loadBooks(bookEvents);
+    location.hash = "home";
+  });
+};//end logoClick
