@@ -1,4 +1,10 @@
 /*style.css*/
+/*START @FONT-FACE LINK*/
+@font-face{
+	font-family: CenturyGothicStd;
+	src: url(fonts/CenturyGothicStd.ttf);
+}
+
 html, body, div, span, h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, img, strong, ol, ul, li, article, aside, footer, header, hgroup,
 menu, nav, section, summary {
@@ -10,6 +16,10 @@ menu, nav, section, summary {
 	vertical-align: baseline;
 }
 
+body{
+	font-family: CenturyGothicStd;
+}
+
 div#cartContain{
 	margin: 10px 0px 10px 30px;
 }
@@ -17,13 +27,24 @@ div#cartContain{
 div#cartContain a{
 	text-decoration: none;
 	color: #373740;
+	margin-right: 20px;
+}
+
+div#cartContain p#logo{
+	font-size: 2em;
+}
+
+div#cartContain p#tagline{
+	margin-bottom: 20px;
+	letter-spacing: 0.24em;
 }
 
 ul.book{
   list-style: none;
   display:inline-block;
-  font-family: times;
-  width:320px;
+  // font-family: times;
+	font-family: CenturyGothicStd;
+  width:335px;
   margin: 30px;
   height:100%;
   border: 1px solid black;
@@ -32,11 +53,15 @@ ul.book{
 }
 
 ul.book li{
-  line-height: 18px;
+  line-height: 1.5em;
 }
 
 .description{
   margin-top: 10px;
+}
+
+.description p {
+	margin-bottom: 0.5em;
 }
 
 ul.book .image {

@@ -12,16 +12,14 @@ var arr = [];
 
 //document.ready...
 $(function(){
-    //set hash to #home
-    location.hash="home";
+  //set hash to #home
+  location.hash="home";
 
   if(location.hash == "home" || " "){
     loadBooks(bookEvents);
     getCartCount();
     homeIconClick();
-
   }//end if(location.hash == "home" || " ")...
-
 });//end document.ready...
 
 
@@ -30,10 +28,10 @@ $(function(){
 //load books on #home
 var loadBooks = function(bkEv){
 
-  $.get("../googleBooksAPIKey.txt", function(data){
-    //get api key
-    api = data.trim();
-  });
+  // $.get("../googleBooksAPIKey.txt", function(data){
+  //   //get api key
+  //   api = data.trim();
+  // });
 
   //ajax call to retrieve info from lib.json
   $.getJSON("json/lib.json", function(data, bks){
@@ -227,7 +225,7 @@ var loadCartView = function(){
   var items = $("<table class='book'>");
   booksInCart.append(items);
   for(i=0; i<cart.length; i++){
-    $(items).append("<tr class='tRow'><td class='cartItem'>"+cart[i].title +"</td><td class='priceItem'>"+cart[i].price+"</td><td class='remove'><a href='javascript:void(0)'>REMOVE</a></td></tr>");
+    $(items).append("<tr class='tRow'><td class='cartItem'>"+cart[i].title +"</td><td class='priceItem'>&#36;<span class='innerPrice'>"+cart[i].price+"</span></td><td class='remove'><a href='javascript:void(0)'>REMOVE</a></td></tr>");
     total+=parseFloat(cart[i].price);
   }//end for
   $(items).append("<tr class='totesCost'><td class='totalCost'>Your Total:</td><td id='grandTotes'>&#36;"+total.toFixed(2)+"</td></tr>");
@@ -240,7 +238,7 @@ var loadCartView = function(){
 var getCartObject = function(item){
   var item = [];
   if(!sessionStorage.getItem('cart')){
-    $('#books').append("<p>CART IS EMPTY</p>")
+    //$('#books').append("<p>CART IS EMPTY</p>")
   } else {
   item = JSON.parse(sessionStorage.getItem("cart"));
 
@@ -253,7 +251,6 @@ var removeItem = function(){
     var seshArr = [];
     var seshObj = {};
     var p = 0;
-
     var total = 0;
     var pri = 0;
     var parent = $(this).parent();
@@ -261,8 +258,7 @@ var removeItem = function(){
 
     $(".book tbody tr").each(function(index, elem){
       var ttl = $(this).children("td.cartItem").html();
-      pri = $(this).children(".priceItem").html();
-      totes = $(this).children("#grandTotes");
+      pri = $(this).children(".priceItem").children(".innerPrice").html();
       p = parseFloat(pri);
 
       // var itemCount = $(this).children().length;
@@ -279,7 +275,7 @@ var removeItem = function(){
       for(i=0; i<cart.length; i++){
         total+=parseFloat(cart[i].price);
       }//end for
-      $("#grandTotes").html("&#36;" + total)
+      $("#grandTotes").html("&#36;" + total.toFixed(2));
       if(seshArr.length == 0){
         sessionStorage.removeItem("cart");
         $("#cartCount").html("");
@@ -301,5 +297,6 @@ var homeIconClick = function(){
   $("#homeIcon").bind("click", function(){
     $("#books").empty();
     loadBooks(bookEvents);
+    location.hash = "home";
   });
 };
