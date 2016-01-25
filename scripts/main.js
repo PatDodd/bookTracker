@@ -244,6 +244,10 @@ var loadCartView = function(){
   $(items).append("<tr class='totesCost'><td class='totalCost'>Your Total:</td><td id='grandTotes'>&#36;"+total.toFixed(2)+"</td></tr>");
   $(".totesCost").css({"font-weight":"bold"});
   $(items).append("<tr><td></td><td></td><td><button id='emptyCart'>Empty Cart</button></td><tr>");
+  if(window.innerWidth <=800){
+    $(items).css({"width":"335"});
+  }//end if window.innerWidth
+  watchWindowWidthCart(items);
   emptyCart();
   removeItem();
 };//loadCartView
@@ -344,3 +348,14 @@ var watchWindowWidth = function(){
     }//end if window.innerWidth
   });//end window.resize
 };//end watchWindowWidth
+
+//watch for changes in window size in the cart view and respond dynamically
+var watchWindowWidthCart = function(itms){
+  $(window).resize(function(){
+    if(window.innerWidth<=800){
+      $(itms).css({"width":"335px"});
+    } else{
+      $(itms).css({"width":"700px"});
+    }
+  });
+};
