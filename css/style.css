@@ -15,6 +15,7 @@ menu, nav, section, summary {
   font: inherit;
   vertical-align: baseline; }
 
+/***styles***/
 body {
   font-family: CenturyGothicStd, Helvetica, sans-serif; }
 
@@ -71,5 +72,10 @@ table.book {
 
 table.book td {
   width: 0.33333%; }
+
+/***responsive.css***/
+/**
+*responsive styles to be imported into style.scss
+**/
 
 /*# sourceMappingURL=style.css.map */

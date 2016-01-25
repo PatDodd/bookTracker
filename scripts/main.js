@@ -137,15 +137,31 @@ var watchHashChanges = function(){
       );
 
       //use value to get the right book from lib.json when users "returns" using "browser history"
+      var books = $("#books");
+      var book= $("<ul class='book' id = " + value + ">");
       $.getJSON("json/lib.json", function(data){
 
-        var books = $("#books");
-        var book = $("<ul class='book' id = " + value + ">").css({
-                                                                 "height":"100%",
-                                                                 "width":"700px",
-                                                                 "border":"1px solid black",
-                                                                 "background-color":"transparent"
-                                                                 });;
+      //change css width property of book view based window.innerWidth
+        if(window.innerWidth > 800){
+          $(book).css({
+                      "height":"100%",
+                      "width":"700px",
+                      "border":"1px solid black",
+                      "background-color":"transparent"
+                      });
+
+        } else if(window.innerWidth <= 800){
+          $(".book").css({
+                         "height":"100%",
+                         "width":"335px",
+                         "border":"1px solid black",
+                         "background-color":"transparent"
+                        });
+         }//end if window.innerWidth
+
+        //watch for changes in screen size and respond dynamically
+        watchWindowWidth();
+
         books.append(book);
         book.append("<li class='image'><img src='" + data.books[value].thumbnail + "'>" + "</li>");
         book.append("<li class='title'>" + data.books[value].title + "</li>");
@@ -307,3 +323,24 @@ var logoClick = function(){
     location.hash = "home";
   });
 };//end logoClick
+
+//watch for changes in screen width in the book view and respond dynamically
+var watchWindowWidth = function(){
+  $(window).resize(function(){
+    if(window.innerWidth <= 800){
+      $(".book").css({
+                    "height":"100%",
+                    "width":"335px",
+                    "border":"1px solid black",
+                    "background-color":"transparent"
+                    });
+    } else if(window.innerWidth > 800){
+      $(".book").css({
+                    "height":"100%",
+                    "width":"700px",
+                    "border":"1px solid black",
+                    "background-color":"transparent"
+                    });
+    }//end if window.innerWidth
+  });//end window.resize
+};//end watchWindowWidth
