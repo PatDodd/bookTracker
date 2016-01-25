@@ -46,7 +46,7 @@ var loadBooks = function(bkEv){
        t = this.title;
        th = this.thumbnail;
        d = this.description;
-       sd = d.slice(0,250);
+       sd = d.slice(0,210);
        pr = this.price;
 
       //add author and title li to ul
