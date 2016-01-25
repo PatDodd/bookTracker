@@ -18,6 +18,8 @@ $(function(){
   if(location.hash == "home" || " "){
     loadBooks(bookEvents);
     getCartCount();
+    homeIconClick();
+
   }//end if(location.hash == "home" || " ")...
 
 });//end document.ready...
@@ -225,13 +227,14 @@ var loadCartView = function(){
   var items = $("<table class='book'>");
   booksInCart.append(items);
   for(i=0; i<cart.length; i++){
-    $(items).append("<tr><td class='cartItem'>"+cart[i].title +"</td><td class='priceItem'>$"+cart[i].price+" x  "+cart[i].quantity+"</td></tr>");
+    $(items).append("<tr class='tRow'><td class='cartItem'>"+cart[i].title +"</td><td class='priceItem'>"+cart[i].price+"</td><td class='remove'><a href='javascript:void(0)'>REMOVE</a></td></tr>");
     total+=parseFloat(cart[i].price);
   }//end for
-  $(items).append("<tr class='totesCost'><td class='totalCost'>Your Total:</td><td>$"+total.toFixed(2)+"</td></tr>");
+  $(items).append("<tr class='totesCost'><td class='totalCost'>Your Total:</td><td id='grandTotes'>&#36;"+total.toFixed(2)+"</td></tr>");
   $(".totesCost").css({"font-weight":"bold"});
-  $(items).append("<tr><td></td><td><button id='emptyCart'>Empty Cart</button></td><tr>");
+  $(items).append("<tr><td></td><td></td><td><button id='emptyCart'>Empty Cart</button></td><tr>");
   emptyCart();
+  removeItem();
 };//loadCartView
 
 var getCartObject = function(item){
@@ -240,12 +243,50 @@ var getCartObject = function(item){
     $('#books').append("<p>CART IS EMPTY</p>")
   } else {
   item = JSON.parse(sessionStorage.getItem("cart"));
-    for(i=0; i<item.length; i++){
-      console.log(item[i]);
-    }//end for
+
   }//end if
 return item;
 };//end getCartObject
+
+var removeItem = function(){
+  $(".book .remove").bind("click", function(){
+    var seshArr = [];
+    var seshObj = {};
+    var p = 0;
+
+    var total = 0;
+    var pri = 0;
+    var parent = $(this).parent();
+    parent.remove();
+
+    $(".book tbody tr").each(function(index, elem){
+      var ttl = $(this).children("td.cartItem").html();
+      pri = $(this).children(".priceItem").html();
+      totes = $(this).children("#grandTotes");
+      p = parseFloat(pri);
+
+      // var itemCount = $(this).children().length;
+      // console.log($(this).children().length);
+      seshObj = {"title":ttl, "price":p, "quantity":1};
+
+      if(seshObj.title != undefined && seshObj.price != undefined){
+        seshArr.push(seshObj);
+        sessionStorage.setItem("cart", JSON.stringify(seshArr));
+      }
+    });//end .each
+      getCartCount();
+      cart = getCartObject();
+      for(i=0; i<cart.length; i++){
+        total+=parseFloat(cart[i].price);
+      }//end for
+      $("#grandTotes").html("&#36;" + total)
+      if(seshArr.length == 0){
+        sessionStorage.removeItem("cart");
+        $("#cartCount").html("");
+        $("#grandTotes").html("&#36;" + 0.00.toFixed(2));
+      }
+  });//end .bind
+};//end removeItem
 
 var emptyCart = function(){
   $("#emptyCart").bind("click", function(){
@@ -253,5 +294,12 @@ var emptyCart = function(){
     $("table.book").empty();
     $("table.book").append("Deletion successful. Your cart is now empty.");
     $("#cartCount").html("");
+  });
+};
+
+var homeIconClick = function(){
+  $("#homeIcon").bind("click", function(){
+    $("#books").empty();
+    loadBooks(bookEvents);
   });
 };
