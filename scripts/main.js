@@ -13,7 +13,7 @@ var arr = [];
 //document.ready...
 $(function(){
   //set hash to #home
-  location.hash="home";
+  //location.hash="home";
 
   if(location.hash == "home" || " "){
     loadBooks(bookEvents);
