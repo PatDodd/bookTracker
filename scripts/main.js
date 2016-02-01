@@ -1,6 +1,6 @@
 //main.js
 
-//closure around the whole kit and caboodle
+//self-invoked closure around the whole kit and caboodle
 (function(){
   //id being must be available after script loads
   var id = 0;
@@ -362,4 +362,4 @@
     });
   };
 
-}());
+})();//end self-invoked closure
