@@ -1,4 +1,4 @@
-//main.js
+//scripts/main.js
 
 //self-invoked closure around the whole kit and caboodle
 (function(){
@@ -82,7 +82,6 @@
     });
 
     $(".book").click(function(){
-    //  console.log($(this));
       $('.button').append("<button class='cart'>Add to Cart</button>");
       addToSessionCart();
       id = $(this).attr('id');
@@ -100,20 +99,18 @@
           var newDescr = "";
           $.getJSON("json/lib.json", function(data){
             newDescr = data.books[id].description;
-            //console.log(newDescr);
             $(".description").html(newDescr);
-
-        });
-        $(".book").css({
-                      "height":"100%",
-                      "width":"700px",
-                      "border":"1px solid black",
-                      "background-color":"transparent"
-                      });
-        });//end $(bObj).children('.book'...
-        $(".book").unbind("click");
-        $(".book").unbind("mouseenter");
-        return id;
+          });
+          $(".book").css({
+                        "height":"100%",
+                        "width":"700px",
+                        "border":"1px solid black",
+                        "background-color":"transparent"
+                        });
+          });//end $(bObj).children('.book'...
+          $(".book").unbind("click");
+          $(".book").unbind("mouseenter");
+          return id;
     });//end $(".book").click(function....
   };
 
@@ -216,7 +213,6 @@
   var loadCartViewOnClick = function(){
     $("#goToCart").bind("click", function(){
       loadCartView();
-
     });//end #goToCart bind func
   };//end loadCartView func
 
@@ -244,7 +240,7 @@
     }//end for
     $(items).append("<tr class='totesCost'><td class='totalCost'>Your Total:</td><td id='grandTotes'>&#36;"+total.toFixed(2)+"</td></tr>");
     $(".totesCost").css({"font-weight":"bold"});
-    $(items).append("<tr><td></td><td></td><td><button id='emptyCart'>Empty Cart</button></td><tr>");
+    $(items).append("<tr><td></td><td></td><td><button id='emptyCart'>Empty Cart</button></td></tr>");
     if(window.innerWidth <=800){
       $(items).css({"width":"335"});
     }//end if window.innerWidth
@@ -256,7 +252,7 @@
   var getCartObject = function(item){
     item = [];
     if(!sessionStorage.getItem('cart')){
-      //$('#books').append("<p>CART IS EMPTY</p>")
+
     } else {
     item = JSON.parse(sessionStorage.getItem("cart"));
 
