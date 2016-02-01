@@ -37,28 +37,28 @@
 
         var book = $("<ul class='book' id = " + id + ">");
         //get author and title
-        var a = "";
-        var t = "";
-        var th = "";
-        var d = "";
-        var sd = "";
-        var pr = 0;
+        var author = "";
+        var title = "";
+        var thumb = "";
+        var description = "";
+        var shortDescription = "";
+        var price = 0;
 
-         a = this.author;
-         t = this.title;
-         th = this.thumbnail;
-         d = this.description;
-         sd = d.slice(0,210);
-         pr = this.price;
+         author = this.author;
+         title = this.title;
+         thumb = this.thumbnail;
+         description = this.description;
+         shortDescription = description.slice(0,210);
+         price = this.price;
 
         //add author and title li to ul
-        book.append("<li class='image'><img src='" + th + "'>" + "</li>");
-        book.append("<li class='title'>" + t + "</li>");
-        book.append("<li clas='author'>" + a + "</li>");
+        book.append("<li class='image'><img src='" + thumb + "'>" + "</li>");
+        book.append("<li class='title'>" + title + "</li>");
+        book.append("<li clas='author'>" + author + "</li>");
 
-        book.append("<li class='price'>&#36;<span class=pNum>" + pr + " </span></li>");
+        book.append("<li class='price'>&#36;<span class=pNum>" + price + " </span></li>");
         book.append("<li class='button'></li>");
-        book.append("<li class='description'>" + sd + "<span>...MORE</span></li>");
+        book.append("<li class='description'>" + shortDescription + "<span>...MORE</span></li>");
 
         //append #books div in body of html
         $("#books").append(book);
@@ -86,11 +86,11 @@
       addToSessionCart();
       id = $(this).attr('id');
       var h = hashTags[id];
-      var bObj = $("#books");
+      var bookObj = $("#books");
 
-      $(bObj).children('.book').each(function(i){
+      $(bookObj).children('.book').each(function(index){
 
-          if(i != id){
+          if(index != id){
             $(this).remove();
           }
 
@@ -182,19 +182,20 @@
   var addToSessionCart = function(){
 
     $('.book li .cart').bind("click",function(){
-      var ttl = $('.book .title').html();
-      var pri = $('.book .pNum').html();
-      var obj = {};
-      obj = {"title":ttl, "price":pri, "quantity":1};
+      var title = $('.book .title').html();
+      var price = $('.book .pNum').html();
+      var bkObject = {};
+      bkObject = {"title":title, "price":price, "quantity":1};
       var cartParsed = [];
+
       if(!sessionStorage.getItem('cart')){
-        arr.push(obj);
+        arr.push(bkObject);
         sessionStorage.setItem("cart", JSON.stringify(arr));
         $("#cartCount").html(arr.length + " items in cart");
       } else {
         cartParsed = JSON.parse(sessionStorage.getItem('cart'));
         //check for matches before adding
-        cartParsed.push(obj);
+        cartParsed.push(bkObject);
         sessionStorage.setItem("cart", JSON.stringify(cartParsed));
         $("#cartCount").html(cartParsed.length + " items in cart");
 
