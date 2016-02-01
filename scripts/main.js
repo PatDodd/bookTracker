@@ -266,7 +266,7 @@
     $(".book .remove").bind("click", function(){
       var seshArr = [];
       var seshObj = {};
-      var p = 0;
+      var pFloat = 0;
       var total = 0;
       var pri = 0;
       var parent = $(this).parent();
@@ -275,9 +275,9 @@
       $(".book tbody tr").each(function(index, elem){
         var ttl = $(this).children("td.cartItem").html();
         pri = $(this).children(".priceItem").children(".innerPrice").html();
-        p = parseFloat(pri);
+        pFloat = parseFloat(pri);
 
-        seshObj = {"title":ttl, "price":p, "quantity":1};
+        seshObj = {"title":ttl, "price":pFloat, "quantity":1};
 
         if(seshObj.title !== undefined && seshObj.price !== undefined){
           seshArr.push(seshObj);
