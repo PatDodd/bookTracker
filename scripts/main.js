@@ -17,6 +17,7 @@
     logoClick();
     watchHashChanges();
     loadCartViewOnClick();
+    watchWindowWidth();
 
   });//end document.ready...
 
@@ -68,11 +69,11 @@
   var bookEvents = function(){
 
     $(".book").on("mouseenter", function(){
-      $(this).css({"border":"1.5px solid black","background-color":"#ECF0F1"});
+      $(this).addClass("mouseover");
     });
 
     $(".book").on("mouseleave", function(){
-      $(this).css({"border":"1px solid black","background-color":"transparent"});
+      $(this).removeClass("mouseover");
     });
 
     $(".book").click(function(){
@@ -94,14 +95,8 @@
           $.getJSON("json/lib.json", function(data){
             newDescr = data.books[id].description;
             $(".description").html(newDescr);
-          });
-          $(".book").css({
-                        "height":"100%",
-                        "width":"700px",
-                        "border":"1px solid black",
-                        "background-color":"transparent"
-                        });
-          });//end $(bObj).children('.book'...
+          });//end getJSON...
+        });//end $(bookObj).children('.book'...
           $(".book").unbind("click");
           $(".book").unbind("mouseenter");
           return id;
@@ -112,13 +107,11 @@
     //watch for hashchanges
     $(window).on("hashchange", function(){
 
-
       //check hash and act accordingly
       if(location.hash == "#home" && !location.reload()){
         //when hash is home empty books div and repopulate with home page
         $("#books").empty();
         loadBooks(bookEvents);
-        //location.reload();
       } else if(location.hash != "#home" && location.hash != "#cart"){
         //if hash isn't #home and there too many uls, empty books div and repopulte with proper book in hashed url
         $("#books").empty();
@@ -129,27 +122,9 @@
         );
 
         //use value to get the right book from lib.json when users "returns" using "browser history"
-        var books = $("#books");
-        var book= $("<ul class='book' id = " + value + ">");
+
         $.getJSON("json/lib.json", function(data){
 
-        //change css width property of book view based window.innerWidth
-          if(window.innerWidth > 800){
-            $(book).css({
-                        "height":"100%",
-                        "width":"700px",
-                        "border":"1px solid black",
-                        "background-color":"transparent"
-                        });
-
-          } else if(window.innerWidth <= 800){
-            $(".book").css({
-                           "height":"100%",
-                           "width":"335px",
-                           "border":"1px solid black",
-                           "background-color":"transparent"
-                          });
-           }//end if window.innerWidth
 
           //watch for changes in screen size and respond dynamically
           watchWindowWidth();
@@ -161,6 +136,7 @@
             description: data.books[value].description,
             id: data.books[value].id
           }]};
+          //load template
           var source = $("#single-template").html();
           //compile template
           var template = Handlebars.compile(source);
@@ -168,15 +144,18 @@
           var booksToPrint = holder;
           //print books
           $("#books").append(template(booksToPrint));
-
+          if(window.innerWidth > 800){
+                $('.book').removeClass("small");
+          } else if(window.innerWidth <= 800){
+            console.log("small");
+            $('.book').addClass("small");
+           }//end if window.innerWidth
           addToSessionCart();
         });//end getJSON for watchHashChanges
       } else if (location.hash == "#cart") {
         loadCartView();
       }//end if watchHashChanges
-
     });//end window.on hashchanges
-
   };//end watchHashChanges func
 
   //add book to sessionStorage shopping cart and get count
@@ -241,16 +220,17 @@
 
     var cartObject = {};
         cartObject = {books: cart};
+    //load template
     var source = $("#cart-template").html();
     //compile template
     var template = Handlebars.compile(source);
-    //append {{books}}
+    //append {{#books}}
     $("#books").append(template(cartObject));
     //append total
     $("#grandTotes").append(total.toFixed(2));
 
     if(window.innerWidth <=800){
-      $("table").css({"width":"335"});
+      $('table').addClass("small");
     }//end if window.innerWidth
     watchWindowWidthCart("table");
     emptyCart();
@@ -338,19 +318,9 @@
   var watchWindowWidth = function(){
     $(window).resize(function(){
       if(window.innerWidth <= 800){
-        $(".book").css({
-                      "height":"100%",
-                      "width":"335px",
-                      "border":"1px solid black",
-                      "background-color":"transparent"
-                      });
+        $("div ul.book-single").addClass("small");
       } else if(window.innerWidth > 800){
-        $(".book").css({
-                      "height":"100%",
-                      "width":"700px",
-                      "border":"1px solid black",
-                      "background-color":"transparent"
-                      });
+        $("div ul.book-single").removeClass("small");
       }//end if window.innerWidth
     });//end window.resize
   };//end watchWindowWidth
@@ -359,11 +329,11 @@
   var watchWindowWidthCart = function(itms){
     $(window).resize(function(){
       if(window.innerWidth<=800){
-        $(itms).css({"width":"335px"});
+      $(itms).addClass("small");
       } else{
-        $(itms).css({"width":"700px"});
-      }
-    });
-  };
+        $(itms).removeClass("small");
+      }//end if
+    });//end window.resize
+  };//end watchWindowWidthCart
 
-})();//end self-invoked closure
+})();//end self-invoked closure containing everything

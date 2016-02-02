@@ -37,11 +37,26 @@ div#cartContain p#tagline {
   margin-bottom: 20px;
   letter-spacing: 0.24em; }
 
-ul.book {
+.book {
   list-style: none;
   display: inline-block;
   font-family: CenturyGothicStd, Helvetica, sans-serif;
   width: 335px;
+  margin: 30px;
+  height: 100%;
+  border: 1px solid black;
+  padding: 10px;
+  cursor: pointer; }
+
+.mouseover {
+  border: 1.5px solid black;
+  background-color: #ECF0F1; }
+
+div ul.book-single {
+  list-style: none;
+  display: inline-block;
+  font-family: CenturyGothicStd, Helvetica, sans-serif;
+  width: 700px;
   margin: 30px;
   height: 100%;
   border: 1px solid black;
@@ -70,7 +85,34 @@ table.book {
   border: 1px solid black;
   padding: 10px; }
 
+html div#books table .book small {
+  width: 335px; }
+
 table.book td {
   width: 0.33333%; }
+
+tr:nth-child(even) {
+  background-color: #ECF0F1; }
+
+tr:last-child {
+  background-color: transparent; }
+
+tr.totesCost {
+  background-color: #373740;
+  color: white; }
+
+div ul.book-single {
+  list-style: none;
+  display: inline-block;
+  font-family: CenturyGothicStd, Helvetica, sans-serif;
+  width: 700px;
+  margin: 30px;
+  height: 100%;
+  border: 1px solid black;
+  padding: 10px;
+  cursor: pointer; }
+
+html body div#books .small {
+  width: 335px; }
 
 /*# sourceMappingURL=style.css.map */
