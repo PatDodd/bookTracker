@@ -238,6 +238,7 @@
     for(var i=0; i<cart.length; i++){
       total+=parseFloat(cart[i].price);
     }//end for
+    console.log(total.toFixed(2));
 
     var cartObject = {};
         cartObject = {books: cart};
