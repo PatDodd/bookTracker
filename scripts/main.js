@@ -38,7 +38,7 @@
         hashTags.push(this.hash);
 
         //get each book from lib.json and push to object array books
-        singleBk = {
+        var singleBk = {
                     author : this.author,
                     title : this.title,
                     thumb : this.thumbnail,
@@ -211,8 +211,6 @@
         if(a.title > b.title){ return 1;}
         return 0;
     });
-
-    var booksInCart = $("#books");
 
     for(var i=0; i<cart.length; i++){
       total+=parseFloat(cart[i].price);
